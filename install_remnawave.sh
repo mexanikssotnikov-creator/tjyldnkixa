@@ -1893,6 +1893,7 @@ check_cert_expiry() {
 
 fix_letsencrypt_structure() {
     local domain=$1
+    local target_dir="${2:-/opt/remnawave}"
     local live_dir="/etc/letsencrypt/live/$domain"
     local archive_dir="/etc/letsencrypt/archive/$domain"
     local renewal_conf="/etc/letsencrypt/renewal/$domain.conf"
@@ -1953,7 +1954,7 @@ fix_letsencrypt_structure() {
         sed -i "s|^privkey =.*|privkey = $privkey_path|" "$renewal_conf"
     fi
 
-    local expected_hook="renew_hook = sh -c 'cd /opt/remnawave && docker compose down remnawave-nginx && docker compose up -d remnawave-nginx && docker compose exec remnawave-nginx nginx -s reload'"
+    local expected_hook="renew_hook = sh -c 'cd $target_dir && docker compose down remnawave-nginx && docker compose up -d remnawave-nginx && docker compose exec remnawave-nginx nginx -s reload'"
     sed -i '/^renew_hook/d' "$renewal_conf"
     echo "$expected_hook" >> "$renewal_conf"
 
@@ -1967,7 +1968,7 @@ handle_certificates() {
     local -n domains_to_check_ref=$1
     local cert_method="$2"
     local letsencrypt_email="$3"
-    local target_dir="/opt/remnawave"
+    local target_dir="${4:-/opt/remnawave}"
 
     declare -A unique_domains
     local need_certificates=false
