@@ -1893,7 +1893,14 @@ check_cert_expiry() {
 
 fix_letsencrypt_structure() {
     local domain=$1
-    local target_dir="${2:-/opt/remnawave}"
+    local target_dir="${2:-}"
+    if [ -z "$target_dir" ]; then
+        if [ -f "/opt/remnanode/docker-compose.yml" ]; then
+            target_dir="/opt/remnanode"
+        else
+            target_dir="/opt/remnawave"
+        fi
+    fi
     local live_dir="/etc/letsencrypt/live/$domain"
     local archive_dir="/etc/letsencrypt/archive/$domain"
     local renewal_conf="/etc/letsencrypt/renewal/$domain.conf"
