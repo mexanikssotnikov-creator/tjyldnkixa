@@ -2141,10 +2141,14 @@ load_module() {
 
         local download_success=false
         if command -v curl &> /dev/null; then
+            local temp_file="${module_file}.tmp"
             local http_code
-            http_code=$(curl -sL -w "%{http_code}" "$module_url" -o "$module_file" 2>/dev/null)
-            if [ "$http_code" = "200" ] && [ -s "$module_file" ]; then
+            http_code=$(curl -sL -w "%{http_code}" "$module_url" -o "$temp_file" 2>/dev/null)
+            if [ "$http_code" = "200" ] && [ -s "$temp_file" ]; then
+                mv "$temp_file" "$module_file"
                 download_success=true
+            else
+                rm -f "$temp_file"
             fi
         elif command -v wget &> /dev/null; then
             wget -q "$module_url" -O "$module_file" 2>/dev/null
